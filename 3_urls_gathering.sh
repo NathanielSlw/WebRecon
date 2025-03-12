@@ -3,12 +3,16 @@ source config.sh
 
 urls_crawling_and_cleaning() {
     local ALL_URLS_FILE="$URLS_DIR/all_urls.txt"
+    local HTTPX_200_URLS="$URLS_DIR/httpx_200_urls.txt"
 
     print_message "$GREEN" "[🌐] URLS Gathering avec gau & katana..."
 
+    # Extraction de la première colonne uniquement (les URLs) du fichier HTTPX_200_FILE
+    cut -d ' ' -f 1 $HTTPX_200_FILE >> $HTTPX_200_URLS
+
     # Récupération des URLs avec gau et katana en parallèle
-    cat $HTTPX_200_FILE | xargs -I {} gau --blacklist png,jpg,gif,svg,css,woff,ttf,ico --threads 10 {} >> $ALL_URLS_FILE
-    katana -list $HTTPX_200_FILE -jc >> $ALL_URLS_FILE
+    cat $HTTPX_200_URLS | xargs -I {} gau --blacklist png,jpg,gif,svg,css,woff,ttf,ico --threads 10 {} >> $ALL_URLS_FILE
+    katana -list $HTTPX_200_URLS -jc >> $ALL_URLS_FILE
     sort -u -o "$ALL_URLS_FILE" "$ALL_URLS_FILE"
 
     # Vérification des URLs live avec httpx

@@ -25,7 +25,7 @@ bash 2_httpx_analysis.sh
 # 3. URL Gathering
 print_separator
 print_message "$LIGHT_BLUE" "[+] 3. URL Gathering & Processing on Live Hosts (200 OK)"
-bash 3_url_gathering.sh
+bash 3_urls_gathering.sh
 
 # 5. Vulnerabilities Scanning
 print_separator
