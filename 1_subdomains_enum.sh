@@ -30,7 +30,7 @@ altdns_func() {
 
 # Fonction pour vérifier les sous-domaines actifs
 check_live_subs_func() {
-    print_message "$GREEN" "[🌐] Vérification des sous-domaines actifs..."
+    print_message "$GREEN" "[🌐] Vérification des sous-domaines actifs avec HTTPX..."
     cat $ALL_SUBS | httpx -silent -o $LIVE_SUBS 
 }
 
