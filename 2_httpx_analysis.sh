@@ -44,9 +44,9 @@ get_info_and_categorize_httpx(){
 go_witness_func() {
     print_message "$GREEN" "[🔍] GoWitness Screenshot en cours..."
     mkdir -p $GOWITNESS_FOLDER/screenshots 
-    gowitness scan file -f $LIVE_SUBS --no-http --screenshot-path $GOWITNESS_FOLDER/screenshots --write-db --write-db-uri "sqlite://$GOWITNESS_FOLDER/gowitness.sqlite3"
+    gowitness scan file -f $LIVE_SUBS --no-http --screenshot-path $GOWITNESS_FOLDER/screenshots --write-db --write-db-uri "sqlite://$GOWITNESS_FOLDER/gowitness.sqlite3" --quiet 2>/dev/null
     gowitness report generate --db-uri "sqlite://$GOWITNESS_FOLDER/gowitness.sqlite3" --screenshot-path $GOWITNESS_FOLDER/screenshots
-    print_message "$CYAN" "[✅] GoWitness terminé ! Lancer 'gowitness report serve' dans le dossier $GOWITNESS_FOLDER"}
+    print_message "$CYAN" "[✅] GoWitness terminé ! Lancer 'gowitness report server' dans le dossier $GOWITNESS_FOLDER"}
 }
 
 bypass_403_testing() {
