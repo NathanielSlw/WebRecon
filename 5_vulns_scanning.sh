@@ -12,12 +12,12 @@ subdomain_takeover_func() {
 # Fonction pour vérifier le HTTP Request Smuggling 
 request_smuggling() {
     print_message "$GREEN" "[🔍] HTTP Request Smuggling en cours..."
-    cat $LIVE_SUBS | $HOME/Tools/smuggler/smuggler.py | tee -a $OUTPUT_DIR/smuggler.txt
+    cat $LIVE_SUBS | $HOME/Tools/smuggler/smuggler.py | tee -a $SUBDOMAIN_DIR/smuggler.txt
 }
 
 vulnerabilities_scanning_on_subdomains() {
     print_separator
-    print_message "$LIGHT_BLUE" "[+] 4. Analyse des vulnérabilités sur les sous-domaines"
+    print_message "$LIGHT_BLUE" "[+] 4.1 Analyse des vulnérabilités sur les sous-domaines"
     subdomain_takeover_func
     request_smuggling
 }
@@ -77,7 +77,7 @@ send_urls_to_vulnerability_scanner() {
 # Vulnerability scanning sur les URLs 
 vulnerability_scanning_on_urls() {
     print_separator
-    print_message "$LIGHT_BLUE" "[+] 4. Analyse ciblée des vulnérabilités"
+    print_message "$LIGHT_BLUE" "[+] 4.2 Analyse des vulnérabilités sur les URLS"
 
     # Analyser JS uniquement s'il y a des fichiers
     js_vuln_analysis
@@ -88,3 +88,36 @@ vulnerability_scanning_on_urls() {
     send_urls_to_vulnerability_scanner
 
 }
+
+# VULN SCANNING ON INTERESTING PAGES --------------------------------------------------------------------------------------------------------------
+
+ssrf_vulns_analysis() {
+    print_message "$GREEN" "[🛡️] Scan de vulnérabilités SSRFs..."
+    cat $SSRF_CANDIDATES | xargs -I {} nuclei -t $HOME/nuclei-templates/http/ssrf.yaml -u "{}"
+}
+
+wordpress_vuln_scanning() {
+    #wpscan --url https://target.com --disable-tls-checks --api-token API_KEY -e ap --plugins-detection aggressive
+}
+
+vulnerability_scanning_on_interesting_pages() {
+    print_separator
+    print_message "$LIGHT_BLUE" "[+] 4.3 Analyse des vulnérabilités sur les pages intéressantes" 
+
+    ssrf_vulns_analysis
+    #wordpress_vuln_scanning
+}
+# --------------------------------------------------------------------------------------------------------------
+
+all_vuln_scanning() {
+    print_separator
+    print_message "$LIGHT_BLUE" "[+] 4. Analyse des vulnérabilités"
+
+    vulnerabilities_scanning_on_subdomains 
+    vulnerability_scanning_on_interesting_pages
+
+    vulnerability_scanning_on_urls
+    
+}
+
+all_vuln_scanning

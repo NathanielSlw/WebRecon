@@ -30,7 +30,7 @@ CLEANS_URLS_FILE="$URLS_DIR/clean_urls.txt"
 JS_URLS_FILE="$URLS_DIR/js_urls.txt"
 PHP_URLS_FILE="$URLS_DIR/php_urls.txt"
 
-# Manual Testing
+# Extract Interesting pages for further manual & automatic analysis
 SSRF_CANDIDATES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/ssrf_candidates.txt"
 AUTH_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/authentication_pages.txt"
 REGISTER_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/register_pages.txt"
