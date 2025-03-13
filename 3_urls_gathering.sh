@@ -63,6 +63,21 @@ urls_crawling_and_cleaning() {
     print_message "$CYAN" "[✅] URL Crawling terminé ! Résultats stockés dans $URLS_DIR"
 }
 
+get_juicy_files() {
+    print_message "$GREEN" "[🔍] Récupération de fichiers juicy / sensibles..."
+
+    cat $URLS_LIVE_FILE | grep -E "\.json|\.xml|\.csv|\.sql|\.conf|\.log|\.bak|\.backup|\.swp|\.old|\.zip|\.tar|\.gz|\.7z|\.rar|\.txt|\.cache|\.secret|\.db|\.yml|\.config" | anew $JUICY_URLS_FILE
+
+    if [[ ! -s "$JUICY_URLS_FILE" ]]; then
+        print_message "$RED" "[❌] Aucun fichier juicy trouvé !"
+        return 1
+    fi
+
+    local juicy_count=$(wc -l < $JUICY_URLS_FILE)
+    print_message "$CYAN" "[✅] $juicy_count fichiers juicy identifiés et stockés dans $JUICY_URLS_FILE"
+}
+
+
 get_js_files() {
     print_message "$GREEN" "[🔍] Récupération des fichiers JS..."
 
@@ -100,6 +115,7 @@ get_php_files() {
     # Appeler la fonction avec ou sans cookie, et spécifier le domaine cible
     urls_crawling_and_cleaning "$COOKIE_HEADER" "$TARGET_DOMAIN"
 
+    get_juicy_files
     get_js_files
     get_php_files
 }

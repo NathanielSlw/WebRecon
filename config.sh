@@ -15,7 +15,7 @@ mkdir -p "$SUBDOMAIN_DIR" "$HTTPX_DIR" "$VULN_DIR" "$URLS_DIR" "$MANUAL_TESTING_
 ALL_SUBS="$SUBDOMAIN_DIR/all_subdomains.txt"
 LIVE_SUBS="$SUBDOMAIN_DIR/live_subdomains.txt"
 VULN_SUBS_TAKEOVER="$VULN_DIR/vulnerable_subs_takeover.txt"
-NAABU_SCAN="$SUBDOMAIN_DIR/naabu_scan.txt" # ?? PAS SUR
+NAABU_SCAN="$SUBDOMAIN_DIR/naabu_scan.txt"
 
 # HTTPX Analysis - Fichiers de sortie 
 HTTPX_FILE="$HTTPX_DIR/httpx_live.txt"
