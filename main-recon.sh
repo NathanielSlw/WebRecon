@@ -27,6 +27,11 @@ print_separator
 print_message "$LIGHT_BLUE" "[+] 3. URL Gathering & Processing on Live Hosts (200 OK)"
 bash 3_urls_gathering.sh
 
+# 4. Extract Interesting Pages
+print_separator
+print_message "$LIGHT_BLUE" "[+] 4. Extraction des pages intéressantes pour analyse ultérieure"
+bash 4_extract_interesting_pages.sh
+
 # 5. Vulnerabilities Scanning
 print_separator
 print_message "$LIGHT_BLUE" "[+] 4. Analyse ciblée des vulnérabilités"

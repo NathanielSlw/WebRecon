@@ -7,8 +7,9 @@ SUBDOMAIN_DIR="$OUTPUT_DIR/1_subdomains"
 HTTPX_DIR="$OUTPUT_DIR/2_httpx_analysis"
 URLS_DIR="$OUTPUT_DIR/3_urls"
 VULN_DIR="$OUTPUT_DIR/vulnerabilities"
+INTERESTING_PAGES_FOR_FURTHER_ANALYSIS="$OUTPUT_DIR/4_extract_interesting_pages"
 
-mkdir -p "$SUBDOMAIN_DIR" "$HTTPX_DIR" "$VULN_DIR" "$URLS_DIR"
+mkdir -p "$SUBDOMAIN_DIR" "$HTTPX_DIR" "$VULN_DIR" "$URLS_DIR" "$MANUAL_TESTING_DIR"
 
 # Subdomains Enumeration - Fichiers de sortie 
 ALL_SUBS="$SUBDOMAIN_DIR/all_subdomains.txt"
@@ -29,6 +30,13 @@ CLEANS_URLS_FILE="$URLS_DIR/clean_urls.txt"
 JS_URLS_FILE="$URLS_DIR/js_urls.txt"
 PHP_URLS_FILE="$URLS_DIR/php_urls.txt"
 
+# Manual Testing
+SSRF_CANDIDATES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/ssrf_candidates.txt"
+AUTH_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/authentication_pages.txt"
+REGISTER_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/register_pages.txt"
+LOGIN_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/login_pages.txt"
+RESET_PASSWORD_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/reset_password_pages.txt"
+OTP_2FA_PAGES="$INTERESTING_PAGES_FOR_FURTHER_ANALYSIS/otp_2fa_pages.txt"
 # --------------------------------------------------------------------------------------------------------------
 
 # Définition des couleurs pour les messages
