@@ -42,6 +42,11 @@ get_info_and_categorize_httpx(){
     print_message "$CYAN" "[✅] Catégorisation terminée ! Résultats stockés dans $HTTPX_DIR"
 }
 
+go_witness_func() {
+    print_message "$GREEN" "[🔍] GoWitness Screenshot en cours..."
+    mkdir $GOWITNESS_FOLDER
+    gowitness scan file -f $LIVE_SUBS --no-http --screenshot-path $GOWITNESS_FOLDER
+
 bypass_403_testing() {
     local output_file="$VULN_DIR/bypass_403_results.txt"
     local input_file="$HTTPX_DIR/httpx_403.txt"

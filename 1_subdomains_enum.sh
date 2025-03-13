@@ -15,7 +15,7 @@ assetfinder_func() {
 
 # Fonction pour extraire les sous-domaines depuis crt.sh
 crtsh_func() {
-    print_message "$GREEN" "[🔍] Extraction de crt.sh..."
+    print_message "$GREEN" "[🔍] Extraction de subdomains avec crt.sh..."
     curl -s "https://crt.sh/?q=%.$DOMAIN&output=json" | jq -r '.[].common_name' | sort -u | anew $ALL_SUBS
 }
 
@@ -34,41 +34,26 @@ check_live_subs_func() {
     cat $ALL_SUBS | httpx -silent -o $LIVE_SUBS 
 }
 
-# Fonction pour afficher la fin du scan
-finish_scan() {
-    print_message "$CYAN" "[✅] Scan terminé !"
-    print_message "$CYAN" "📁 Tous les résultats sont dans $SUBDOMAIN_DIR/"
+naabu_scan_func() {
+    print_message "$GREEN" "[🔍] Scan de ports en cours avec Naabu..."
+    naabu -list $LIVE_SUBS -nmap-cli 'nmap -sV -sC' -o $NAABU_SCAN
 }
 
-
 1_subdomain_enumeration() {
+    echo $DOMAIN >> $ALL_SUBS
 	subfinder_func
 	assetfinder_func
 	crtsh_func
 	#altdns_func
+   
 	check_live_subs_func
-	# subdomain_takeover_func
-    # request_smuggling
-	finish_scan
+    naabu_scan_func
+
+	print_message "$CYAN" "[✅] Scan terminé !"
+    print_message "$CYAN" "📁 Tous les résultats sont dans $SUBDOMAIN_DIR/"
 }
 
 1_subdomain_enumeration
 
 
 # --------------------------------------------------------------------------------------------
-
-# Fonction pour vérifier le takeover des sous-domaines
-subdomain_takeover_func() {
-    print_message "$RED" "[⚠️] Vérification du takeover de sous-domaines..."
-    subzy run --targets $ALL_SUBS --hide_fails --vuln | anew $VULN_SUBS_TAKEOVER
-}
-
-request_smuggling() {
-    print_message "$GREEN" "[🔍] HTTP Request Smuggling en cours..."
-    cat $LIVE_SUBS | $HOME/Tools/smuggler/smuggler.py | tee -a $OUTPUT_DIR/smuggler.txt
-}
-
-vulnerabilities_scanning() {
-    subdomain_takeover_func
-    request_smuggling
-}
