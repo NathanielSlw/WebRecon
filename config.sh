@@ -24,7 +24,7 @@ HTTPX_301_302_FILE="$HTTPX_DIR/httpx_301_302_redirects.txt"
 HTTPX_401_FILE="$HTTPX_DIR/httpx_401.txt"
 HTTPX_403_FILE="$HTTPX_DIR/httpx_403.txt"
 HTTPX_OTHER="$HTTPX_DIR/httpx_autres.txt"
-GOWITNESS_FOLDER="$HTTPX_DIR/screenshots/" 
+GOWITNESS_FOLDER="$HTTPX_DIR/gowitness/" 
 
 # URLS Gathering - Fichiers de sortie
 URLS_LIVE_FILE="$URLS_DIR/all_urls_live.txt"

@@ -1,7 +1,6 @@
 #!/bin/bash
 source config.sh
 
-
 get_info_and_categorize_httpx(){
     print_message "$GREEN" "[🌐] Catégorisation des résultats HTTPX..."
 
@@ -44,8 +43,11 @@ get_info_and_categorize_httpx(){
 
 go_witness_func() {
     print_message "$GREEN" "[🔍] GoWitness Screenshot en cours..."
-    mkdir $GOWITNESS_FOLDER
-    gowitness scan file -f $LIVE_SUBS --no-http --screenshot-path $GOWITNESS_FOLDER
+    mkdir -p $GOWITNESS_FOLDER/screenshots 
+    gowitness scan file -f $LIVE_SUBS --no-http --screenshot-path $GOWITNESS_FOLDER/screenshots --write-db --write-db-uri "sqlite://$GOWITNESS_FOLDER/gowitness.sqlite3"
+    gowitness report generate --db-uri "sqlite://$GOWITNESS_FOLDER/gowitness.sqlite3" --screenshot-path $GOWITNESS_FOLDER/screenshots
+    print_message "$CYAN" "[✅] GoWitness terminé ! Lancer 'gowitness report serve' dans le dossier $GOWITNESS_FOLDER"}
+}
 
 bypass_403_testing() {
     local output_file="$VULN_DIR/bypass_403_results.txt"
@@ -64,6 +66,7 @@ bypass_403_testing() {
 
 2_httpx_analysis_and_categorization() {
     get_info_and_categorize_httpx
+    go_witness_func
     bypass_403_testing
 }
 
