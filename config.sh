@@ -29,6 +29,7 @@ GOWITNESS_FOLDER="$HTTPX_DIR/gowitness/"
 # URLS Gathering - Fichiers de sortie
 URLS_LIVE_FILE="$URLS_DIR/all_urls_live.txt"
 CLEANS_URLS_FILE="$URLS_DIR/clean_urls.txt"
+$JUICY_URLS_FILE="$URLS_DIR/juicy_urls.txt"
 JS_URLS_FILE="$URLS_DIR/js_urls.txt"
 PHP_URLS_FILE="$URLS_DIR/php_urls.txt"
 
