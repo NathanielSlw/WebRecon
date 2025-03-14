@@ -8,7 +8,6 @@ source config.sh
 
 urls_crawling_and_cleaning() {
     local ALL_URLS_FILE="$URLS_DIR/all_urls.txt"
-    local HTTPX_200_URLS="$URLS_DIR/httpx_200_urls.txt"
 
     local COOKIE_HEADER="$1"  # Paramètre optionnel pour le header personnalisé (ex: cookie)
     local TARGET_DOMAIN="$2"  # Domaine spécifique pour appliquer le cookie

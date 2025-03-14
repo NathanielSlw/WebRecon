@@ -25,7 +25,7 @@ vulnerabilities_scanning_on_subdomains() {
 # VULN SCANNING ON URLS -------------------------------------------------------------------------------------------------------------- 
 
 js_vuln_analysis() {
-    print_message "$GREEN" "Analyse JS ..."
+    print_message "$GREEN" "Analyse JS de secrets & API..."
 
     if [[ ! -s "$JS_URLS_FILE" ]]; then
         print_message "$RED" "[❌] Aucun fichier JS à analyser !"
